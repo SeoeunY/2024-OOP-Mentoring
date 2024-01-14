@@ -15,9 +15,9 @@ int main(void)
 
     int len = strlen(imsi);
 
-    for (int i = 0;i < len - 1;i++)
+    for (int i = 0;i < len;i++)
     {
-        if (i == len - 1)
+        if (i == len -1)
         {
             for (int k = 0;k < len - 1;k++)
             {
