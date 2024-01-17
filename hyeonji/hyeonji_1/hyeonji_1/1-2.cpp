@@ -1,53 +1,46 @@
-//#include <iostream>
-//#include <string>
-//using namespace std;
-//
-//void main() {
-//	string s;
-//	string m;
-//	string output;
-//
-//	int i = 0;
-//	int k = 0;
-//	int count=1;
-//
-//	cin >> s;
-//	cin >> m;
-//	//check string size
-//	while (s[i] != NULL) {
-//		i++;
-//	}
-//	while (m[k] != NULL) {
-//		k++;
-//	}
-//	//check overlapped
-//	for (int l = 0; l < i; l++) {
-//		for (int h = l+1; h < i; h++) {
-//			if (s[l] == s[h]) {
-//				count++;
-//			}
-//		}
-//		for (int h = 0; h < k; h++) {
-//			if (s[l] == m[h]) {
-//				count++;
-//			}
-//		}
-//		cout << s[l];
-//		if (count != 1) {
-//			cout << count;
-//		}
-//		count = 1;
-//	}
-//	for (int l = 0; l < k; l++) {
-//		for (int h = l + 1; h < k; h++) {
-//			if (m[k] == m[h]) {
-//				count++;
-//			}
-//		}
-//		cout << s[l];
-//		if (count != 1) {
-//			cout << count;
-//		}
-//		count = 1;
-//	}
-//}
+#include <iostream>
+using namespace std;
+
+char arr[3072][6144];
+int N;
+
+void star(int x, int y) {
+    arr[x + 0][y + 2] = '*';
+
+    arr[x + 1][y + 1] = '*';
+    arr[x + 1][y + 3] = '*';
+
+    arr[x + 2][y + 0] = '*';
+    arr[x + 2][y + 1] = '*';
+    arr[x + 2][y + 2] = '*';
+    arr[x + 2][y + 3] = '*';
+    arr[x + 2][y + 4] = '*';
+
+}
+
+void recursion(int n, int x, int y) {
+    if (n == 3) {
+        star(x, y);
+        return;
+    }
+    recursion(n / 2, x, y + n / 2);
+    recursion(n / 2, x + n / 2, y);
+    recursion(n / 2, x + n / 2, y + n);
+
+}
+
+void main() {
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N * 2; j++) {
+            arr[i][j] = ' ';
+        }
+    }
+    recursion(N, 0, 0);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N * 2; j++) {
+            cout << arr[i][j];
+        }
+        cout << endl;
+    }
+}

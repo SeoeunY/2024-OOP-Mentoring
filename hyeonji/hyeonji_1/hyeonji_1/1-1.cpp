@@ -1,49 +1,46 @@
 #include <iostream>
 using namespace std;
 
-void triangle(int column, int col);
+char arr[3072][6144];
+int N;
 
-void main() {
-	int N;
-	cin >> N;
+void star(int x, int y) {
+    arr[x + 0][y + 2] = '*';
 
-	for (int col = N-1; col >= 0; col--) 
-	{
-		int column = col%3;
-		triangle(column, col);
-		cout << endl;
-	}
+    arr[x + 1][y + 1] = '*';
+    arr[x + 1][y + 3] = '*';
+
+    arr[x + 2][y + 0] = '*';
+    arr[x + 2][y + 1] = '*';
+    arr[x + 2][y + 2] = '*';
+    arr[x + 2][y + 3] = '*';
+    arr[x + 2][y + 4] = '*';
+
 }
 
-void triangle(int column, int col) {
-	switch (column)
-	{
-	case 2:
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << "*";
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << endl;
-		break;
+void recursion(int n, int x, int y) {
+    if (n == 3) {
+        star(x, y);
+        return;
+    }
+    recursion(n / 2, x, y + n / 2);
+    recursion(n / 2, x + n / 2, y);
+    recursion(n / 2, x + n / 2, y + n);
 
-	case 1:
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << "* *";
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << endl;
-		break;
+}
 
-	case 0:
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << "*****";
-		for (int i = 0; i < col; i++)
-			cout << " ";
-		cout << endl;
-		break;
-	}
-
+void main() {
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N * 2; j++) {
+            arr[i][j] = ' ';
+        }
+    }
+    recursion(N, 0, 0);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N * 2; j++) {
+            cout << arr[i][j];
+        }
+        cout << endl;
+    }
 }
