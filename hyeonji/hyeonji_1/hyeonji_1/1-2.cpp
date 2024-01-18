@@ -1,46 +1,56 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-char arr[3072][6144];
-int N;
-
-void star(int x, int y) {
-    arr[x + 0][y + 2] = '*';
-
-    arr[x + 1][y + 1] = '*';
-    arr[x + 1][y + 3] = '*';
-
-    arr[x + 2][y + 0] = '*';
-    arr[x + 2][y + 1] = '*';
-    arr[x + 2][y + 2] = '*';
-    arr[x + 2][y + 3] = '*';
-    arr[x + 2][y + 4] = '*';
-
-}
-
-void recursion(int n, int x, int y) {
-    if (n == 3) {
-        star(x, y);
-        return;
-    }
-    recursion(n / 2, x, y + n / 2);
-    recursion(n / 2, x + n / 2, y);
-    recursion(n / 2, x + n / 2, y + n);
-
-}
-
 void main() {
-    cin >> N;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N * 2; j++) {
-            arr[i][j] = ' ';
-        }
+    bool arr[20];
+    char s[20];
+    char m[20];
+    int s_cou = 0;
+    int m_cou = 0;
+    int count = 1;
+    int i = 0;
+    int j = 0;
+
+    for (int i = 0; i < 20; i++) {
+        arr[i] = false;
     }
-    recursion(N, 0, 0);
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N * 2; j++) {
-            cout << arr[i][j];
+
+    cin >> s;
+    cin >> m;
+
+    while (s[i] != NULL) {
+        s_cou++;
+        i++;
+    }
+
+    while (m[j] != NULL) {
+        m_cou++;
+        j++;
+    }
+
+    for (int i = 0; i < s_cou; i++) {
+        for (int j = 0; j < m_cou; j++) {
+            if (s[i] == m[j]) {
+                count++;
+                arr[j] = true;
+            }
         }
-        cout << endl;
+        cout << s[i] << count;
+        count = 1;
+
+    }
+    for (int i = 0; i < m_cou-1; i++) {
+        for (int j = i+1; j < m_cou; j++) {
+            if (m[i] == m[j] && arr[i] == false) {
+                count++;
+                arr[j] = true;
+            }
+        }
+        if (arr[i] != true) {
+            cout << m[i] << count;
+        }
+        count = 1;
+
     }
 }
