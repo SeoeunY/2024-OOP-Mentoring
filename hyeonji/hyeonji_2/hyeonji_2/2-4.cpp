@@ -8,7 +8,7 @@ void merge(int* arr, int m, int mid, int n) {
 	int j = mid + 1;
 	int k = m;
 	
-	while (i <= mid && j <= n) {
+	while (i <= mid && j <= n) { //compare & put into "sorted" 
 		if (arr[i] <= arr[j]) {
 			sorted[k] = arr[i];
 			i++;
@@ -20,7 +20,7 @@ void merge(int* arr, int m, int mid, int n) {
 		k++;
 	}
 
-	if (i > mid) {
+	if (i > mid) { 
 		for (int t = j; t <= n; t++) {
 			sorted[k] = arr[t];
 			k++;
@@ -38,7 +38,8 @@ void merge(int* arr, int m, int mid, int n) {
 	}
 }
 
-void mergeSort(int* arr,int m,int n) {
+//recursion function
+void mergeSort(int* arr,int m,int n) { 
 	if (m < n) {
 		int mid = (m + n) / 2;
 		mergeSort(arr, m, mid);
