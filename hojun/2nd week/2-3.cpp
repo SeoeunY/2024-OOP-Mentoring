@@ -1,48 +1,44 @@
 #include <iostream>
+#include <algorithm>
+
 using namespace std;
 
-//////func declare
-void merge_sort(int st, int en);
-void merge(int st, int en);
+int a[100000]; // input arr
 
-///input arr & temp arr
-int a[100000];
-int tmp[100000];
+void quick_sort(int st, int en); // func declare
 
 int main(void)
 {
-    int n;//the number of inputs in advance.
-    cin >> n;
+	int n; // the number of inputs in advance.
+	cin >> n;
+	for (int i = 0; i < n; i++) // number input loop
+		cin >> a[i];
 
-    for (int i = 0; i < n; i++)//number input loop
-        cin >> a[i];
-
-    merge_sort(0, n);//sort func call
-
-    cout << a[(n - 1) / 2];//output print
-    return 0;
+	quick_sort(0, n);		// sort func call
+	cout << a[(n - 1) / 2]; // output print
+	return 0;
 }
 
-void merge_sort(int st, int en)
+void quick_sort(int st, int en)
 {
-    if (en == (st + 1)) return;//base condition
-    int mid = (st + en) / 2;//mid reset
-    merge_sort(st, mid);//recursive call
-    merge_sort(mid, en);//recursive call
-    merge(st, en);//merge func call
-}
+	if (en <= st + 1) // base condition
+		return;
 
-void merge(int st, int en)
-{
-    int mid = (st + en) / 2;//mid reset
-    int idx1 = st;//start point reset
-    int idx2 = mid;//end point reset
-    for (int i = st; i < en; i++) {
-        if (idx2 == en) tmp[i] = a[idx1++];//idx2 val end
-        else if (idx1 == mid) tmp[i] = a[idx2++];//idx1 val end
-        else if (a[idx1] <= a[idx2]) tmp[i] = a[idx1++];//value compare
-        else tmp[i] = a[idx2++]; //value compare
-    }
-    for (int i = st; i < en; i++)//move to std arr from the temp arr
-        a[i] = tmp[i];
+	int pivot = a[st]; // pivot reset
+	int id1 = st + 1;  // index reset
+	int id2 = en - 1;  // index reset
+
+	while (1)
+	{
+		while (id1 <= id2 && a[id1] <= pivot)
+			id1++; // index move
+		while (id1 <= id2 && a[id2] > pivot)
+			id2--; // index move
+		if (id1 > id2)
+			break;			  // loop break if
+		swap(a[id1], a[id2]); // swap afte value compare
+	}
+	swap(a[st], a[id2]);	 // pivot and smaller than pivot value swap
+	quick_sort(st, id2);	 // recursive call
+	quick_sort(id2 + 1, en); // recursive call
 }
