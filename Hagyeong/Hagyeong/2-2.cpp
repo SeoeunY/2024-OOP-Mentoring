@@ -1,3 +1,4 @@
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
@@ -42,3 +43,4 @@ int main(void)
 	cout << "\nthe median number : "; //Print median value
 	cout << arr[med]<<endl;
 }
+*/
