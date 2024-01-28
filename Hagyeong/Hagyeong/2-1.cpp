@@ -1,4 +1,4 @@
-/*
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
@@ -17,20 +17,20 @@ int main(void)
 		cin >> arr[k]; //Enter numbers to be sorted in ascending order
 	}
 
-	for (int k = 0;k < size-1;k++) //Sort with bubble sorting
+	for (int k = 0;k < size;k++) //Sort with bubble sorting
 	{
-		for (int i = k+1;i < size;i++)
+		for (int i = 0;i < size-1;i++)
 		{
-			if (arr[k] > arr[i])
+			if (arr[i] > arr[i+1])
 			{
-				tmp = arr[k];
-				arr[k] = arr[i];
-				arr[i] = tmp;
+				tmp = arr[i];
+				arr[i] = arr[i+1];
+				arr[i+1] = tmp;
 			}
 		}
 	}
 
-	med = (size - 1) / 2; //Find the median
+	int med = (size - 1) / 2; //Find the median
 	
 	cout << "Ascending results : ";
 
@@ -42,4 +42,3 @@ int main(void)
 	cout << "\nthe median number : "; //Print median value
 	cout << arr[med]<<endl;
 }
-*/
