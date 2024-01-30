@@ -39,6 +39,7 @@ void quickSort(int * arr, int start, int end) {
 
 int main(void) {
 	int size;
+	int i;
 
 	// Get the number of inputs
 	cout << "Number of inputs : ";
@@ -48,7 +49,7 @@ int main(void) {
 
 	// Get integers
 	cout << "Input integers with spaces : ";
-	for (int i = 0; i < size; i++) {
+	for (i = 0; i < size; i++) {
 		cin >> arr[i];
 	}
 
