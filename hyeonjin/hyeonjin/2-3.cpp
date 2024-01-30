@@ -2,8 +2,7 @@
 using namespace std;
 
 // Function to swap two integers
-void swap(int* a, int* b)
-{
+void swap(int* a, int* b) {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
