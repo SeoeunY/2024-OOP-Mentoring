@@ -6,24 +6,34 @@ using namespace std;
 class Employee//class declare
 {
 private:
-	char name[20];
+	char* name;
 	int age = 0;
-	char country[20];
-	char job[20];
+	char* country;
+	char* job;
 public:
 	Employee(char* name, int age, char* country, char* job);
 	bool isNameCorrect(char* name) const;
 	void print() const;
 	void change(char* name, int age, char* country, char* job);
+	~Employee()//Destructor
+	{
+		//free memory part//
+		delete[] this->name;
+		delete[] this->country;
+		delete[] this->job;
+	}
 };
 
-Employee* emp[10];//employee array
+
 
 int main()
 {
+	Employee* emp[10];//employee array
+	for (int i = 0; i < 10; i++)
+		emp[i] = NULL;
 	int emp_num = 0;//employee number
 	char input[10] = {};//command input array
-	char fi[20];
+	char fi[20];//find command input array
 	///input information variable
 	char name[20];
 	int age;
@@ -73,15 +83,22 @@ int main()
 				}
 			}
 		}
-
 	}
+	for (int i = 0; i < emp_num; i++)
+		delete emp[i];
 }
 
 //////class member function define part/////////
 Employee::Employee(char* name, int age, char* country, char* job)
 {
+	int len = strlen(name);
+	this->name = new char[len + 1];
 	strcpy(this->name, name);
+	len = strlen(country);
+	this->country = new char[len + 1];
 	strcpy(this->country, country);
+	len = strlen(job);
+	this->job = new char[len + 1];
 	strcpy(this->job, job);
 	this->age = age;
 }
@@ -103,8 +120,19 @@ void Employee::print() const
 
 void Employee::change(char* name, int age, char* country, char* job)
 {
+	//free existing allocation//////
+	delete[] this->name;
+	delete[] this->country;
+	delete[] this->job;
+	//////////////////////////
+	int len = strlen(name);
+	this->name = new char[len + 1];
 	strcpy(this->name, name);
+	len = strlen(country);
+	this->country = new char[len + 1];
 	strcpy(this->country, country);
+	len = strlen(job);
+	this->job = new char[len + 1];
 	strcpy(this->job, job);
 	this->age = age;
 }
