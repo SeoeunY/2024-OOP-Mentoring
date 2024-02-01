@@ -43,9 +43,9 @@ int main()
 
 	while (1)
 	{
-		cin >> input;
+		cin >> input;//command input
 
-		if (strcmp(input, "exit") == 0) { break; }
+		if (strcmp(input, "exit") == 0) { break; }//break point
 		else if (strcmp(input, "print") == 0)
 		{
 			cout << "=====print=====\n";
@@ -54,17 +54,16 @@ int main()
 		}
 		else if (strcmp(input, "insert") == 0)
 		{
-			cout << "새로운 직원\n";
-			cin >> name >> age >> country >> job;
-			emp[emp_num] = new Employee(name, age, country, job);
-			emp_num++;
+			cin >> name >> age >> country >> job;//Enter employee information
+			emp[emp_num] = new Employee(name, age, country, job);//employee memory allocation
+			emp_num++;//employee increase
 		}
 		else if (strcmp(input, "find") == 0)
 		{
-			cin >> fi;
+			cin >> fi;//Enter the name you want to find
 			for (int i = 0; i < emp_num; i++)
 			{
-				if (emp[i]->isNameCorrect(fi))
+				if (emp[i]->isNameCorrect(fi))//name correct if
 				{
 					cout << "=====find=====\n";
 					emp[i]->print();
@@ -73,12 +72,12 @@ int main()
 		}
 		else if (strcmp(input, "change") == 0)
 		{
-			cin >> input >> name >> age >> country >> job;
-			for (int i = 0; i < emp_num; i++)
+			cin >> input >> name >> age >> country >> job;//Enter information to replace
+			for (int i = 0; i < emp_num; i++)//employee search loop
 			{
-				if (emp[i]->isNameCorrect(input))
+				if (emp[i]->isNameCorrect(input))//name correct if
 				{
-					emp[i]->change(name, age, country, job);
+					emp[i]->change(name, age, country, job);//change function
 					break;
 				}
 			}
@@ -91,26 +90,26 @@ int main()
 //////class member function define part/////////
 Employee::Employee(char* name, int age, char* country, char* job)
 {
-	int len = strlen(name);
-	this->name = new char[len + 1];
-	strcpy(this->name, name);
-	len = strlen(country);
-	this->country = new char[len + 1];
-	strcpy(this->country, country);
-	len = strlen(job);
-	this->job = new char[len + 1];
-	strcpy(this->job, job);
+	int len = strlen(name);//input array's length
+	this->name = new char[len + 1];//memory allocation
+	strcpy(this->name, name);//input array copy
+	len = strlen(country);//input array's length
+	this->country = new char[len + 1];//memory allocation
+	strcpy(this->country, country);//input array copy
+	len = strlen(job);//input array's length
+	this->job = new char[len + 1];//memory allocation
+	strcpy(this->job, job);//input array copy
 	this->age = age;
 }
 
 bool Employee::isNameCorrect(char* name) const
 {
-	bool k = !strcmp(this->name, name);
-	return k;
+	return !strcmp(this->name, name);//Use not, because it's 1 if it's the same
 }
 
 void Employee::print() const
 {
+	/////////////print part////////////
 	cout << "Name: " << this->name << endl;
 	cout << "Age: " << this->age << endl;
 	cout << "Country: " << this->country << endl;
@@ -120,19 +119,19 @@ void Employee::print() const
 
 void Employee::change(char* name, int age, char* country, char* job)
 {
-	//free existing allocation//////
+	//free existing allocation///
 	delete[] this->name;
 	delete[] this->country;
 	delete[] this->job;
-	//////////////////////////
-	int len = strlen(name);
-	this->name = new char[len + 1];
-	strcpy(this->name, name);
-	len = strlen(country);
-	this->country = new char[len + 1];
-	strcpy(this->country, country);
-	len = strlen(job);
-	this->job = new char[len + 1];
-	strcpy(this->job, job);
+	////////////////////////////
+	int len = strlen(name);//input array's length
+	this->name = new char[len + 1];//memory allocation
+	strcpy(this->name, name);//input array copy
+	len = strlen(country);//input array's length
+	this->country = new char[len + 1];//memory allocation
+	strcpy(this->country, country);//input array copy
+	len = strlen(job);//input array's length
+	this->job = new char[len + 1];//memory allocation
+	strcpy(this->job, job);//input array copy
 	this->age = age;
 }
