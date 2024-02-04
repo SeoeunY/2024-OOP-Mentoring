@@ -25,18 +25,64 @@ public:
 		this->job = new char[strlen(job) + 1];
 		strcpy(this->job, job);
 	}
-	bool isNameCorrect(char* name);
-	void print();
+
+	//bool isNameCorrect(char* name)
+	
+	char* comparename()
+	{
+
+		return this->name;
+	}
+
+	void print(void) const
+	{
+		cout << "Name: " << this->name << endl;
+		cout << "Age: " << this->age << endl;
+		cout << "Country: " << this->country << endl;
+		cout << "Job: " << this->job << endl;
+	}
+
 	void change(char* name, int age, char* country, char* job);
 };
 
 Employee* member[10];
 int mNum = 0;
 
-int insert(char* name, int age, char* country, char* job)
+void insert(char* name, int age, char* country, char* job)
 {
 	member[mNum] = new Employee(name,age,country,job);
 	mNum++;
+}
+
+void printFind(int i)
+{
+	cout << "=====find=====" << endl;
+	member[i]->print();
+	cout << "----------"<<endl;
+}
+
+void find(char* name)
+{
+	for (int i = 0;i < mNum;i++)
+	{
+		if (member[i]->comparename() == name)
+		{
+			printFind(i);
+			break;
+		}
+		else if(member[i]->comparename() != name && (i == mNum - 1))
+			break;
+	}
+}
+
+void printAll(void)
+{
+	cout << "=====print=====" << endl;
+	for (int k = 0;k < mNum;k++)
+	{
+		member[k]->print();
+		cout << "----------" << endl;
+	}
 }
 
 int main(void)
@@ -46,28 +92,31 @@ int main(void)
 	{
 		char choice[100];
 		char name[100];
+		char name2[100];
 		int age;
 		char country[100];
 		char job[100];
 
-		scanf("%s %s %d %s %s", choice, name,&age,country,job);
+		scanf("%s", choice);
 
 		if (strcpy(choice, "insert") == 0)
 		{
+			scanf("%s %d %s %s",name, &age, country, job);
 			insert(name,age,country,job);
 			break;
 		}
 		else if (strcpy(choice, "find") == 0)
 		{
-
+			scanf("%s", name);
+			find(name);
 		}
 		else if (strcpy(choice, "change") == 0)
 		{
-
+			scanf("%s %s %d %s %s", name, name2, &age, country, job);
 		}
 		else if (strcpy(choice, "print") == 0)
 		{
-
+			printAll();
 		}
 		else if (strcpy(choice, "exit") == 0)
 		{
