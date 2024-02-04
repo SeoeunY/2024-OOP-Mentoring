@@ -17,8 +17,8 @@ public:
 		this->name = new char[strlen(name) + 1];
 		strcpy(this->name, name);
 
-		this->class_name = new char[strlen(name) + 1];
-		strcpy(this->class_name, name);
+		this->class_name = new char[strlen(classname) + 1];
+		strcpy(this->class_name, classname);
 	}
 	void print(void) const
 	{
@@ -38,7 +38,7 @@ class School
 	int size = 0;
 
 public:
-	int new_c(char* name, int age, char* classname)
+	void new_c(char* name, int age, char* classname)
 	{
 		this->student_list[this->size] = new Student(name, age, classname);
 		size++;
@@ -54,20 +54,38 @@ public:
 	}
 	void printClass(char* classname)
 	{
-		int k;
+		int i = 0;
 		cout << "=====print_class=====" << endl;
-		for (k = 0;k < size;k++)
+		for (int k = 0;k < size;k++)
 		{
 			if (student_list[k]->compareClassname() == classname)
 			{
 				student_list[k]->print();
 				cout << "----------" << endl;
+				i++;
 				break;
 			}
 			else if (student_list[k]->compareClassname() == classname && (k == size - 1))
 				break;
 		}
-		cout << "Number of classmates : " << k << endl;
+		cout << "Number of classmates : " << i << endl;
+	}
+	void sortName(void)
+	{
+		Student* ss[1];
+
+		for (int k = 0;k < size;k++)
+		{
+			for (int i = 0;i < size-1;i++)
+			{
+				if (student_list[i]->compareClassname() > student_list[i+1]->compareClassname())
+				{
+					ss[0] = student_list[i];
+					student_list[i] = student_list[i + 1];
+					student_list[i + 1] = ss[0];
+				}
+			}
+		}
 	}
 };
 
@@ -87,12 +105,11 @@ int main(void)
 		if (strcmp(choice, "new_student") == 0)
 		{
 			scanf("%s %d %s", name, &age, classname);
-			
 			s.new_c(name, age, classname);
 		}
 		else if (strcmp(choice, "sort_by_name") == 0)
 		{
-
+			s.sortName();
 		}
 		else if (strcmp(choice, "print_all") == 0)
 		{
@@ -105,7 +122,7 @@ int main(void)
 		}
 		else if (strcmp(choice, "exit") == 0)
 		{
-
+			break;
 		}
 	}
 }
