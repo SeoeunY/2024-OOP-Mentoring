@@ -20,6 +20,12 @@ public:
 		this->class_name = new char[strlen(name) + 1];
 		strcpy(this->class_name, name);
 	}
+	void print(void) const
+	{
+		cout << "Name: " << this->name << endl;
+		cout << "Age: " << this->age << endl;
+		cout << "Class: " << this->class_name << endl;
+	}
 };
 
 class School
@@ -32,6 +38,15 @@ public:
 	{
 		this->student_list[this->size] = new Student(name, age, classname);
 		size++;
+	}
+	void printAll(void)
+	{
+		cout << "=====print_all=====" << endl;
+		for (int k = 0;k < size ;k++)
+		{
+			student_list[k]->print();
+			cout << "----------" << endl;
+		}
 	}
 };
 
@@ -60,7 +75,7 @@ int main(void)
 		}
 		else if (strcmp(choice, "print_all") == 0)
 		{
-
+			s.printAll();
 		}
 		else if (strcmp(choice, "print_class") == 0)
 		{
