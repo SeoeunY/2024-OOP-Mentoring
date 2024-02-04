@@ -13,7 +13,7 @@ private:
 	char* job;
 
 public:
-	Employee(char* name, int age, char* country, char* job) //»ý¼ºÀÚ
+	Employee(char* name, int age, char* country, char* job)
 		:age(age)
 	{
 		this->name = new char[strlen(name) + 1];
@@ -42,7 +42,19 @@ public:
 		cout << "Job: " << this->job << endl;
 	}
 
-	void change(char* name, int age, char* country, char* job);
+	void change(char* name, int age, char* country, char* job)
+	{
+		this->name = new char[strlen(name) + 1];
+		strcpy(this->name, name);
+
+		this->country = new char[strlen(country) + 1];
+		strcpy(this->country, country);
+
+		this->job = new char[strlen(job) + 1];
+		strcpy(this->job, job);
+
+		this->age = age;
+	}
 };
 
 Employee* member[10];
@@ -85,6 +97,20 @@ void printAll(void)
 	}
 }
 
+void changeFind(char *name, char* name2, int age, char* country, char* job)
+{
+	for (int i = 0;i < mNum;i++)
+	{
+		if (member[i]->comparename() == name)
+		{
+			member[i]->change(name2,age,country,job);
+			break;
+		}
+		else if (member[i]->comparename() != name && (i == mNum - 1))
+			break;
+	}
+}
+
 int main(void)
 {
 
@@ -99,28 +125,29 @@ int main(void)
 
 		scanf("%s", choice);
 
-		if (strcpy(choice, "insert") == 0)
+		if (strcmp(choice, "insert") == 0)
 		{
 			scanf("%s %d %s %s",name, &age, country, job);
 			insert(name,age,country,job);
-			break;
 		}
-		else if (strcpy(choice, "find") == 0)
+		else if (strcmp(choice, "find") == 0)
 		{
 			scanf("%s", name);
 			find(name);
 		}
-		else if (strcpy(choice, "change") == 0)
+		else if (strcmp(choice, "change") == 0)
 		{
 			scanf("%s %s %d %s %s", name, name2, &age, country, job);
+			changeFind(name,name2,age,country,job);
 		}
-		else if (strcpy(choice, "print") == 0)
+		else if (strcmp(choice, "print") == 0)
 		{
 			printAll();
 		}
-		else if (strcpy(choice, "exit") == 0)
+		else if (strcmp(choice, "exit") == 0)
 		{
-
+			break;
 		}
 	}
+	return 0;
 }
