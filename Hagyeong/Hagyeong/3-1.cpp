@@ -33,12 +33,6 @@ public:
 		else if (strcmp(this->name, name) != 0)
 			return false;
 	}
-	
-	char* comparename()
-	{
-
-		return this->name;
-	}
 
 	void print(void) const
 	{
@@ -109,12 +103,14 @@ void changeFind(char *name, char* name2, int age, char* country, char* job)
 {
 	for (int i = 0;i < mNum;i++)
 	{
-		if (strcmp(member[i]->comparename(),name)==0)
+		bool a = member[i]->isNameCorrect(name);
+
+		if (a == true)
 		{
-			member[i]->change(name2,age,country,job);
+			member[i]->change(name2, age, country, job);
 			break;
 		}
-		else if (strcmp(member[i]->comparename(), name) != 0 && (i == mNum - 1))
+		else if (a != true && (i == mNum - 1))
 			break;
 	}
 }
