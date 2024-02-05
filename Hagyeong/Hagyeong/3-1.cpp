@@ -77,12 +77,12 @@ void find(char* name)
 {
 	for (int i = 0;i < mNum;i++)
 	{
-		if (member[i]->comparename() == name)
+		if (strcmp(member[i]->comparename(),name)==0)
 		{
 			printFind(i);
 			break;
 		}
-		else if(member[i]->comparename() != name && (i == mNum - 1))
+		else if(strcmp(member[i]->comparename(), name) != 0 && (i == mNum - 1))
 			break;
 	}
 }
@@ -101,12 +101,12 @@ void changeFind(char *name, char* name2, int age, char* country, char* job)
 {
 	for (int i = 0;i < mNum;i++)
 	{
-		if (member[i]->comparename() == name)
+		if (strcmp(member[i]->comparename(),name)==0)
 		{
 			member[i]->change(name2,age,country,job);
 			break;
 		}
-		else if (member[i]->comparename() != name && (i == mNum - 1))
+		else if (strcmp(member[i]->comparename(), name) != 0 && (i == mNum - 1))
 			break;
 	}
 }
