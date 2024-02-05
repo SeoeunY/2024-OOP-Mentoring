@@ -26,7 +26,13 @@ public:
 		strcpy(this->job, job);
 	}
 
-	//bool isNameCorrect(char* name)
+	bool isNameCorrect(char* name)
+	{
+		if (strcmp(this->name, name) == 0)
+			return true;
+		else if (strcmp(this->name, name) != 0)
+			return false;
+	}
 	
 	char* comparename()
 	{
@@ -77,12 +83,14 @@ void find(char* name)
 {
 	for (int i = 0;i < mNum;i++)
 	{
-		if (strcmp(member[i]->comparename(),name)==0)
+		bool a = member[i]->isNameCorrect(name);
+
+		if (a==true)
 		{
 			printFind(i);
 			break;
 		}
-		else if(strcmp(member[i]->comparename(), name) != 0 && (i == mNum - 1))
+		else if(a!=true && (i == mNum - 1))
 			break;
 	}
 }
