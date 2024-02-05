@@ -23,7 +23,6 @@ private:
 	int size = 0;
 
 public:
-	School();
 	void new_student(char* name, int age, char* class_name);
 	void sort_by_name();
 	void print_all();
@@ -54,7 +53,7 @@ char* Student::getname() {
 }
 
 void Student::print() {
-	cout << "Name: " << name << "\nAge: " << age << "\nClass" << class_name << "\n----------" << endl;
+	cout << "Name: " << name << "\nAge: " << age << "\nClass: " << class_name << "\n----------" << endl;
 }
 
 bool Student::isClassCorrect(char* class_name) {
@@ -103,4 +102,39 @@ void School::exit() {
 	for (int i = 0; i < size; i++) {
 		delete student_list[i];
 	}
+}
+
+int main() {
+	School school;
+	char command[100];
+	char name[100];
+	int age;
+	char class_name[100];
+
+	while (true) {
+		cin >> command;
+
+		if (!strcmp(command, "new_student")) {
+			cin >> name >> age >> class_name;
+			school.new_student(name, age, class_name);
+		}
+		else if (!strcmp(command, "sort_by_name")) {
+			school.sort_by_name();
+		}
+		else if (!strcmp(command, "print_all")) {
+			school.print_all();
+		}
+		else if (!strcmp(command, "print_class")) {
+			cin >> class_name;
+			school.print_class(class_name);
+		}
+		else if (!strcmp(command, "exit")) {
+			school.exit();
+			break;
+		}
+		else {
+			cout << "Invalid command" << endl;
+		}
+	}
+	return 0;
 }
