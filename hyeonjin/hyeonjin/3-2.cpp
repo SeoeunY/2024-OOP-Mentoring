@@ -68,8 +68,8 @@ void School::new_student(char* name, int age, char* class_name) {
 
 void School::sort_by_name() {
 	class Student *temp;
-	for (int i = 0; i < size-1; i++) {
-		for (int j = i; j < i - 1; j++) {
+	for (int i = 0; i < size; i++) {
+		for (int j = i; j < size; j++) {
 			if (strcmp(student_list[i]->getname(), student_list[j]->getname()) > 0) {
 				temp = student_list[i];
 				student_list[i] = student_list[j ];
