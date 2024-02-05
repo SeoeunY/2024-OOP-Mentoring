@@ -30,6 +30,10 @@ public:
 	{
 		return this->class_name;
 	}
+	char* compareName(void)
+	{
+		return this->name;
+	}
 };
 
 class School
@@ -58,14 +62,13 @@ public:
 		cout << "=====print_class=====" << endl;
 		for (int k = 0;k < size;k++)
 		{
-			if (student_list[k]->compareClassname() == classname)
+			if (strcmp(student_list[k]->compareClassname(),classname)==0)
 			{
 				student_list[k]->print();
 				cout << "----------" << endl;
 				i++;
-				break;
 			}
-			else if (student_list[k]->compareClassname() == classname && (k == size - 1))
+			else if (strcmp(student_list[k]->compareClassname(), classname) != 0 && (k == size - 1))
 				break;
 		}
 		cout << "Number of classmates : " << i << endl;
@@ -78,7 +81,7 @@ public:
 		{
 			for (int i = 0;i < size-1;i++)
 			{
-				if (student_list[i]->compareClassname() > student_list[i+1]->compareClassname())
+				if (strcmp(student_list[i]->compareName(),student_list[i+1]->compareName())>0)
 				{
 					ss[0] = student_list[i];
 					student_list[i] = student_list[i + 1];
