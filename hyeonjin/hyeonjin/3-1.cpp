@@ -14,7 +14,7 @@ public:
 	// Constructor to initialize Employee object
 	Employee(char* name, int age, char* country, char* job);
 
-	; // Destructor to free dynamically allocated memory
+	// Destructor to free dynamically allocated memory
 	~Employee();
 
 	// Check if the given name matches the employee's name
